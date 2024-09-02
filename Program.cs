@@ -1,15 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+
 namespace Target{
     
     class Program{
 
         static void Main (string[] args){
 
-
-            //Console.WriteLine("Hello, World!");
-            Exercicio5();
+            //Referenciar numero do exercicio desejado:
+            //Ex:
+            //Exercicio5();
 
         }
 
@@ -50,8 +50,6 @@ namespace Target{
             }else{
                 Console.WriteLine("Numero NÃO pertence a sequencia Fibonacci");
             }
-
-
         }
 
 
