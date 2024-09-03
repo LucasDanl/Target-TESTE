@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using System.Globalization;
+using System.Xml;
 
 namespace Target{
     
@@ -9,7 +10,7 @@ namespace Target{
 
             //Referenciar numero do exercicio desejado:
             //Ex:
-            //Exercicio5();
+            //Exercicio3();
 
         }
 
@@ -54,7 +55,30 @@ namespace Target{
 
 
         static public void Exercicio3(){
-            //xml indisponivel
+
+            XmlDocument document = new XmlDocument();
+            document.Load(@"../../../dados xml.xml");
+            XmlNodeList linhas = document.SelectNodes("root/row");
+            Dictionary<int, float> faturamento = new Dictionary<int, float>();
+
+            foreach (XmlNode linha in linhas)
+            {
+                int dia = Int32.Parse(linha["dia"].InnerText);
+                float valor = float.Parse(linha["valor"].InnerText, CultureInfo.InvariantCulture);
+                faturamento.Add(dia, valor);
+            }
+
+            int indexAux;
+
+            Console.WriteLine("Dia com menor faturamento:");
+            indexAux = faturamento.Where(f => f.Value > 0).OrderBy(o => o.Value).FirstOrDefault().Key;
+            Console.WriteLine("Dia: "+ indexAux + " - Faturamento: "+ faturamento.ElementAt(indexAux-1).Value.ToString("F2"));
+
+            //Possiveis outros dados poderiam ser extraidos e usando o "indexAux" como auxiliar pra operação, poupando variáveis e memória   
+
+            //ATENÇÃO:
+            //Verificar e-mail enviado por lucas050300@gmail.com explicando o problema que ouve na Gupy e prejudicou a resolução deste exercicio.       
+
         }
 
         static public void Exercicio4(){
@@ -72,7 +96,7 @@ namespace Target{
             foreach (var estado in faturamento)
             {                
                 Console.WriteLine("Estado: " + estado.Key +" - Percentual de Faturamento: "+ ((estado.Value/total) *100).ToString("F2") + "%");                
-            }
+            } 
 
         }
 
